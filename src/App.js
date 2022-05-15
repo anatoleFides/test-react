@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import PostFilter from './components/PostFilter';
 import PostForm from './components/PostForm';
@@ -6,32 +6,29 @@ import PostList from './components/PostList';
 
 import MyButton from './components/UI/button/MyButton';
 import MyModal from './components/UI/modal/MyModal';
+import Loader from './components/UI/Loader/Loader';
+
+import PostService from './API/PostService'
+
+import { usePosts } from './hooks/usePosts';
+import { useFetching } from './hooks/useFetching';
 
 import './styles/App.css';
 
-
 function App() {
 
-  const [posts, setPosts] = useState([
-    { id: 1, title: 'zz Javascript 1', body: 'yy Description' },
-    { id: 2, title: 'cc Javascript 2', body: '11 Description' },
-    { id: 3, title: '22 Javascript 3', body: 'xx Description' }
-  ])
+  const [posts, setPosts] = useState([])
   const [filter, setFilter] = useState({ sort: '', query: '' })
-
   const [modal, setModal] = useState(false)
+  const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query)
+  const [fetchPosts, isPostsLoading, postError] = useFetching(async () => {
+    const response = await PostService.getAll()
+    setPosts(response.data)
+  })
 
-  const sortedPosts = useMemo(() => {
-    if (filter.sort) {
-      return [...posts].sort((a, b) => a[filter.sort].localeCompare(b[filter.sort]))
-    } else {
-      return posts
-    }
-  }, [filter.sort, posts])
-
-  const sortedAndSearchedPosts = useMemo(() => {
-    return sortedPosts.filter(post => post.title.toLowerCase().includes(filter.query))
-  }, [filter.query, sortedPosts])
+  useEffect(() => {
+    fetchPosts()
+  }, [])
 
   const createPost = (newPost) => {
     setPosts([...posts, newPost])
@@ -60,7 +57,14 @@ function App() {
         filter={filter}
         setFilter={setFilter}
       />
-      <PostList remove={removePost} posts={sortedAndSearchedPosts} title={'Посты про JS'} />
+      {postError &&
+        <h2>Произошла ошибка ${postError}</h2>
+      }
+      {isPostsLoading
+        ? <div style={{ display: 'flex', justifyContent: 'center', marginTop: '50px' }}><Loader /></div>
+        : <PostList remove={removePost} posts={sortedAndSearchedPosts} title={'Посты про JS'} />
+      }
+
     </div >
 
   );

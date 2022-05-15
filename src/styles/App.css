@@ -23,6 +23,14 @@
   margin: 16px 0 0 0;
   border-radius: 8px;
 }
+.post__text {
+  margin: 4px 0 0 0;
+  font-size: 12px;
+  font-style: italic;
+}
+.post__btns {
+  margin: 0 0 0 20px;
+}
 
 .remove-btn {
   margin-right: 0.5rem;

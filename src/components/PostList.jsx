@@ -8,8 +8,8 @@ import PostItem from './PostItem';
 const PostList = ({ posts, title, remove }) => {
   if (!posts.length) {
     return (
-<h2 style={{ textAlign: 'center' }}>
-          Посты не найдены
+      <h2 style={{ textAlign: 'center' }}>
+        Посты не найдены
       </h2>
     )
   }
@@ -29,7 +29,6 @@ const PostList = ({ posts, title, remove }) => {
           </CSSTransition>
         )}
       </TransitionGroup>
-      
     </div>
   )
 }
