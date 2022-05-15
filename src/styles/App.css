@@ -50,3 +50,22 @@
   transform: translateX(-350px);
   transition: all 500ms ease-in;
 }
+
+.page__wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 30px 0 20px;
+}
+
+.page {
+  padding: 6px 8px;
+  margin: 0 4px;
+  border: 1px solid #696969;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.page__current {
+  background: #ccc;
+  font-weight: 700;
+}
