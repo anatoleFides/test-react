@@ -24,7 +24,7 @@ const PostIdPage = () => {
   }, [])
 
   return (
-    <div style={{maxWidth: '800px', margin: '0 auto'}}>
+    <div style={{maxWidth: '800px', margin: '20px auto  0'}}>
       <h4>Пользователь попал на страницу поста с ID = {params.id}</h4>
       {isLoading
         ? <Loader/>
