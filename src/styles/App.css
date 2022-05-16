@@ -31,6 +31,8 @@
   font-style: italic;
 }
 .post__btns {
+  display: flex;
+  justify-content: space-between;
   margin: 0 0 0 20px;
 }
 
