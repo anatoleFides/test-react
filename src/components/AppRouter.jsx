@@ -20,27 +20,27 @@ const AppRouter = () => {
     isAuth
       ?
       <Switch>
-      {privateRoutes.map(route =>
-        <Route
-          component={route.component}
-          path={route.path}
-          exact={route.exact}
-          key={route.path}
-        />
-      )}
-      <Redirect to="/posts" />
+        {privateRoutes.map(route =>
+          <Route
+            component={route.component}
+            path={route.path}
+            exact={route.exact}
+            key={route.path}
+          />
+        )}
+        <Redirect to="/posts" />
       </Switch>
       :
-    <Switch>
-      {publicRoutes.map(route =>
-        <Route
-          component={route.component}
-          path={route.path}
-          exact={route.exact}
-          key={route.path}
-        />
-      )}
-      <Redirect to="/login" />
+      <Switch>
+        {publicRoutes.map(route =>
+          <Route
+            component={route.component}
+            path={route.path}
+            exact={route.exact}
+            key={route.path}
+          />
+        )}
+        <Redirect to="/login" />
       </Switch>
   )
 }
